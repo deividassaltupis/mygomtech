@@ -1,8 +1,8 @@
 export enum Routes {
   Login = '/login',
   Users = '/items',
-  Weak = '/items/weak',
-  Reused = '/items/reused',
+  WrongEmails = '/items/wrong',
+  ReusedEmails = '/items/reused',
   Root = '/',
 }
 

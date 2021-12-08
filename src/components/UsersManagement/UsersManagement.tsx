@@ -6,8 +6,10 @@ import LoadingScreen from '../LoadingScreen';
 import Header from './components/Header/Header';
 import { Route, Switch } from 'react-router-dom';
 import { Routes } from '~/constants';
-import itemHasWeakPassword from '~/utils/itemHasWeakPassword';
-import itemHasReusedPassword from '~/utils/itemHasReusedPassword';
+
+import userHasWrongEmail from '~/utils/userHasWrongEmail';
+import userHasReusedEmail from '~/utils/userHasReusedEmail';
+
 import { useUserContext } from '../UserContext';
 
 const UsersManagement = () => {
@@ -35,12 +37,12 @@ const UsersManagement = () => {
         <Route exact path={Routes.Users}>
           <List items={items} />
         </Route>
-        <Route path={Routes.Weak}>
-          <List items={items} />
+        <Route path={Routes.WrongEmails}>
+          <List items={items.filter((item) => userHasWrongEmail(item))} />
         </Route>
-        <Route path={Routes.Reused}>
+        <Route path={Routes.ReusedEmails}>
           <List
-            items={items.filter((item) => itemHasReusedPassword(item, items))}
+            items={items.filter((item) => userHasReusedEmail(item, items))}
           />
         </Route>
       </Switch>
