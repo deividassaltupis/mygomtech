@@ -6,25 +6,27 @@ import authentication from './endpoints/authentication';
 import items from './endpoints/items';
 
 import logger from './middleware/logger';
-
+import verifyToken from './middleware/authentication';
 
 const app = express();
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 app.use(bodyParser.json());
 
 // middleware
 app.use(cors());
 app.use(logger);
+app.use(verifyToken);
 
 // routes
 app.use(authentication);
 app.use(items);
 
-
 app.listen(9003, 'localhost');
 
-console.log('server is running on port:', 9003)
+console.log('server is running on port:', 9003);
