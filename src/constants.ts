@@ -3,6 +3,7 @@ export enum Routes {
   Users = '/items',
   WrongEmails = '/items/wrong',
   ReusedEmails = '/items/reused',
+  OldEmails = '/items/old',
   Root = '/',
 }
 

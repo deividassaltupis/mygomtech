@@ -1,6 +1,8 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import authentication from '../middleware/authentication';
 import { getItems, updateItem } from '../services/itemManager';
+
+import { IEmployee } from '../interfaces/IEmployee';
 
 const router = Router();
 
@@ -17,14 +19,27 @@ router.post('/api/items', authentication, (req, res) => {
     res.status(400).send('mandatory parameter is missing');
     return;
   }
-  
-  updateItem({
+
+  const items = getItems();
+  // - Find item that's currently intended to be updated
+  const currentItem = items.find((item) => item.id === id);
+
+  // - Create updated item object
+  const updatedItem: IEmployee = {
     id,
     name,
     role,
     email,
-    createdAt: new Date().toDateString(),
-  })
+    createdAt: currentItem.createdAt,
+    emailUpdatedAt: currentItem.emailUpdatedAt,
+  };
+
+  // - If old email do not equals new email - email update date must be recorded
+  if (currentItem.email !== email)
+    updatedItem.emailUpdatedAt = new Date().toISOString();
+
+  // - Finnaly update the item
+  updateItem(updatedItem);
 
   res.status(200).send();
 });

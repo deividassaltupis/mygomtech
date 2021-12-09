@@ -22,7 +22,11 @@ const UpdateModal: FC<IUpdateModal> = ({ item, updateListItemFunc }) => {
 
   // - Function which sends edited item data to server as well as updates it locally
   const updateEmailHandler = async () => {
-    const updatedItem = { ...item, email: newEmail };
+    const updatedItem = {
+      ...item,
+      email: newEmail,
+      emailUpdatedAt: new Date().toISOString(),
+    };
 
     // - Update item data in server
     await updateItem(updatedItem);
