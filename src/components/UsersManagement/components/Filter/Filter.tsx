@@ -5,6 +5,7 @@ import FilterTab from './components/FilterTab';
 
 import userHasWrongEmail from '~/utils/userHasWrongEmail';
 import userHasReusedEmail from '~/utils/userHasReusedEmail';
+import userHasOldEmail from '~/utils/userHasOldEmail';
 
 import './filter-style.scss';
 
@@ -23,6 +24,11 @@ const Filter: FC<IFilter> = ({ items }) => {
     return count;
   }, 0);
 
+  const oldEmailsCount = items.reduce((count, item) => {
+    if (userHasOldEmail(item)) count++;
+    return count;
+  }, 0);
+
   return (
     <div className="filter">
       <FilterTab title="All" count={items.length} path={Routes.Users} />
@@ -36,6 +42,7 @@ const Filter: FC<IFilter> = ({ items }) => {
         count={reusedEmailsCount}
         path={Routes.ReusedEmails}
       />
+      <FilterTab title="Old" count={oldEmailsCount} path={Routes.OldEmails} />
     </div>
   );
 };

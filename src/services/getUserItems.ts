@@ -13,6 +13,7 @@ export interface IItem {
   role: Roles;
   email: string;
   createdAt: string;
+  emailUpdatedAt: string;
 }
 
 const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
@@ -27,6 +28,8 @@ const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
   });
 
   const data = await response.json();
+
+  console.log(data.items[0].createdAt);
 
   return data.items;
 };

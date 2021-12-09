@@ -11,6 +11,7 @@ import { Routes } from '~/constants';
 
 import userHasWrongEmail from '~/utils/userHasWrongEmail';
 import userHasReusedEmail from '~/utils/userHasReusedEmail';
+import userHasOldEmail from '~/utils/userHasOldEmail';
 
 import { useUserContext } from '../UserContext';
 
@@ -73,6 +74,12 @@ const UsersManagement = () => {
         <Route path={Routes.ReusedEmails}>
           <List
             items={items.filter((item) => userHasReusedEmail(item, items))}
+            updateListItemFunc={(item: IItem) => itemUpdateHandler(item)}
+          />
+        </Route>
+        <Route path={Routes.OldEmails}>
+          <List
+            items={items.filter((item) => userHasOldEmail(item))}
             updateListItemFunc={(item: IItem) => itemUpdateHandler(item)}
           />
         </Route>
