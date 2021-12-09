@@ -10,11 +10,11 @@ import { useUserContext } from '~/components/UserContext';
 import './header-style.scss';
 
 interface IHeader {
-  items: Array<IItem>;
+  wrongItems: Array<IItem>;
   username: string;
 }
 
-const Header: FC<IHeader> = ({ items, username }) => {
+const Header: FC<IHeader> = ({ wrongItems, username }) => {
   const { deleteData } = useUserContext();
   const { push } = useHistory();
 
@@ -33,7 +33,7 @@ const Header: FC<IHeader> = ({ items, username }) => {
       <div className="user-section">
         <button onClick={handleLogout}>{`Logout ${username}`}</button>
       </div>
-      <h1>{`${items.length} Emails are wrong`}</h1>
+      <h1>{`${wrongItems.length} Emails are wrong`}</h1>
       <span>
         Email validator to protect your company from bad registrations
       </span>
