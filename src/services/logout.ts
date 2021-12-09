@@ -1,4 +1,4 @@
-import { API } from '~/constants';
+import { API } from '~/types/enums';
 import getUrl from '../utils/getUrl';
 
 const logout = async () => {

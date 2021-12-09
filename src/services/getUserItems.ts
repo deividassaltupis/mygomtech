@@ -1,20 +1,7 @@
-import { API } from '~/constants';
+import { API } from '~/types/enums';
 import getUrl from '~/utils/getUrl';
 
-export enum Roles {
-  read = 'read',
-  write = 'write',
-  amin = 'amin',
-}
-
-export interface IItem {
-  id: string;
-  name: string;
-  role: Roles;
-  email: string;
-  createdAt: string;
-  emailUpdatedAt: string;
-}
+import { IItem } from '~/types/interfaces';
 
 const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
   const url = getUrl(API.Items, {
@@ -28,8 +15,6 @@ const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
   });
 
   const data = await response.json();
-
-  console.log(data.items[0].createdAt);
 
   return data.items;
 };

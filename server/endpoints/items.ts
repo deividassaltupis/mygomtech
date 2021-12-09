@@ -2,7 +2,7 @@ import { Router } from 'express';
 import authentication from '../middleware/authentication';
 import { getItems, updateItem } from '../services/itemManager';
 
-import { IEmployee } from '../interfaces/IEmployee';
+import { IEmployee } from '../types/interfaces';
 
 const router = Router();
 

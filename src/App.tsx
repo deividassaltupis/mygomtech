@@ -1,28 +1,32 @@
-import {BrowserRouter as Router, Redirect, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
 
-import Login from './components/Login/Login';
-import UsersManagement from './components/UsersManagement/UsersManagement';
-import PrivateRoute from './components/PrivateRoute';
-import PublicRoute from './components/PublicRoute';
-import {Routes} from './constants';
-import { UserContextProvider } from './components/UserContext';
+import { LoginPage, UsersManagementPage } from './components/pages';
+
+import {
+  UserContextProvider,
+  PrivateRoute,
+  PublicRoute,
+} from './components/custom';
+
+import { Routes } from './types/enums';
 
 import './style/styles.scss';
 
 const App = () => (
   <Router>
     <Switch>
-      <PublicRoute
-        path={Routes.Login}
-        component={Login}
-      />
+      <PublicRoute path={Routes.Login} component={LoginPage} />
       <PrivateRoute
         path={Routes.Users}
-        component={() => <UserContextProvider><UsersManagement /></UserContextProvider>}
+        component={() => (
+          <UserContextProvider>
+            <UsersManagementPage />
+          </UserContextProvider>
+        )}
       />
       <PrivateRoute
         path={Routes.Root}
-        component={() => <Redirect to={Routes.Users}/>}
+        component={() => <Redirect to={Routes.Users} />}
       />
     </Switch>
   </Router>
