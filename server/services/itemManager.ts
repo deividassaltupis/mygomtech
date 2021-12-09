@@ -3,7 +3,12 @@ import { employees } from '../data';
 let items = [];
 
 export const updateItem = (item) => {
-  items.push(item);
+  const itemIndex = items.findIndex(
+    (currentItem) => currentItem.id === item.id
+  );
+
+  if (itemIndex !== -1) items[itemIndex] = item;
+  else items.push(item);
 };
 
 export const getItems = () => {
@@ -13,8 +18,5 @@ export const getItems = () => {
     return {
       ...(updatedItem || userItem),
     };
-  })
+  });
 };
-
-
-
