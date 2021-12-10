@@ -1,0 +1,7 @@
+@import '../../../style/_variables';
+
+.error-block {
+  border-left: 2px solid $red;
+  background-color: $grey-lightest;
+  font-size: 14px;
+}

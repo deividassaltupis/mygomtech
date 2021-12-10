@@ -1,10 +1,11 @@
-import {useEffect, useState} from 'react';
-import getUserItems, {IItem} from '../../services/getUserItems';
+import { useEffect, useState } from 'react';
+import getUserItems from '~/services/getUserItems';
+import { IItem } from '~/types/interfaces';
 
-const userItemsProvider = () => {
+const useItemsProvider = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<String>();
-  const [items, setItems] = useState<Array<IItem>>([])
+  const [items, setItems] = useState<Array<IItem>>([]);
 
   useEffect(() => {
     (async () => {
@@ -19,14 +20,14 @@ const userItemsProvider = () => {
       }
 
       setIsLoading(false);
-    })()
+    })();
   }, []);
 
   return {
     isLoading,
     errorMessage,
     items,
-  }
+  };
 };
 
-export default userItemsProvider;
+export default useItemsProvider;

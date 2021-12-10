@@ -1,16 +1,13 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { API } from '~/constants';
-import getUrl from '~/utils/getUrl';
 
-interface IUser {
-  updateUser: () => void;
-  deleteData: () => void;
-  errorMessage: string;
-  isLoading: boolean;
-  username: string;
-  email: string;
-  id: string;
-}
+// - Enums
+import { API } from '~/types/enums';
+
+// - Interfaces
+import { IUser } from '~/types/interfaces';
+
+// - Utils
+import getUrl from '~/utils/getUrl';
 
 const UserContext = createContext<IUser>({
   updateUser: () => {},
@@ -39,9 +36,8 @@ export const UserContextProvider = ({ children }) => {
       const response = await fetch(getUrl(API.User), {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
-        }
+        },
       });
-
       const data = await response.json();
 
       setUsername(data?.username);
@@ -52,7 +48,7 @@ export const UserContextProvider = ({ children }) => {
     }
 
     setIsLoading(false);
-  }
+  };
 
   const deleteData = () => {
     setErrorMessage(null);
@@ -63,7 +59,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-   updateUser();
+    updateUser();
   }, []);
 
   const value = {
@@ -76,11 +72,7 @@ export const UserContextProvider = ({ children }) => {
     id,
   };
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  )
-}
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
 
 export default UserContext;

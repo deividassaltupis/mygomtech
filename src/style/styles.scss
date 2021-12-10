@@ -2,7 +2,9 @@
 @import './_spacings';
 @import './__mixins.scss';
 
-html, body, #app {
+html,
+body,
+#app {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -31,7 +33,9 @@ html, body, #app {
 
 .loading-screen {
   @include flex-center;
-  font-size: large;
+  width: 100vw;
+  height: 100vh;
+  font-size: 32px;
 }
 
 .modal {

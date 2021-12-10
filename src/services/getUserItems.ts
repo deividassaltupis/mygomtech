@@ -1,18 +1,7 @@
-import {API} from "~/constants";
-import getUrl from "~/utils/getUrl";
+import { API } from '~/types/enums';
+import getUrl from '~/utils/getUrl';
 
-export enum Roles {
-  read = 'read',
-  write = 'write',
-  amin = 'amin'
-}
-
-export interface IItem {
-  name: string,
-  role: Roles,
-  email: string,
-  createdAt: string,
-}
+import { IItem } from '~/types/interfaces';
 
 const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
   const url = getUrl(API.Items, {
@@ -22,7 +11,7 @@ const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
-    }
+    },
   });
 
   const data = await response.json();
